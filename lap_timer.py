@@ -88,7 +88,40 @@ def longest_decreasing_streak(timer):
     donde los tiempos disminuyen estrictamente.
     """
     # TODO: Implementar
-    pass
+    times = timer['times']
+    max_streak = 1
+    current_streak = 1
+    for i in range(1, len(times)):
+        if times[i] < times[i - 1]:
+            current_streak += 1
+            if current_streak > max_streak:
+                max_streak = current_streak
+        else:
+            current_streak = 1
+    return max_streak
+
+def main():
+    timer = init(10)
+    timer = add_lap(timer, 1.85)
+    timer = add_lap(timer, 1.02)
+    timer = add_lap(timer, 0.91)
+    timer = add_lap(timer, 0.87)
+    timer = add_lap(timer, 0.85)
+    timer = add_lap(timer, 0.82)
+    timer = add_lap(timer, 0.82)
+    timer = add_lap(timer, 0.82)
+    timer = add_lap(timer, 0.83)
+    timer = add_lap(timer, 0.90)
+
+    print("numero de vueltas =", count(timer))           # 10
+    print("tiempo acumulado =", cumulative_time(timer))  # 9.69
+    print("vuelta mas rapida =", fastest_lap(timer))     # 0.82
+    print("50m mas rapidos =", fastest_multi_lap(timer, 5))  # 4.14
+    print("racha mas larga =", longest_decreasing_streak(timer))  # 6
+    print(format_laps(timer))
+
+if __name__ == "__main__":
+    main()
 
 
 def main():
